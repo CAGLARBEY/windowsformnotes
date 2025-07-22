@@ -1,0 +1,42 @@
+private void btnForm2Ac_Click(object sender, EventArgs e)
+{
+    Form2 form2 = new Form2();
+    form2.Show(); // Modeless (aynı anda birden fazla formla etkileşim)
+    // veya
+    form2.ShowDialog(); // Modal (Form2 kapanana kadar Form1'e dönülemez)
+}
+
+/* Form2 'yi bir kez açma.*/
+private Form2 form2Instance; // Sınıf seviyesinde tanımla
+
+private void buttonForm2Click(object sender, EventArgs e)
+{
+    if (form2Instance == null || form2Instance.IsDisposed)
+    {
+        form2Instance = new Form2();
+        form2Instance.FormClosed += (s, args) => form2Instance = null;
+        form2Instance.Show();
+    }
+    else
+    {
+        form2Instance.BringToFront();
+    }
+}
+
+
+/* Load Event kullanımı */
+// Form2.cs içinde
+private void Form2_Load(object sender, EventArgs e)
+{
+    // Form yüklendiğinde yapılacak işlemler
+    this.Text = "Form2 Yüklendi";
+    // Veritabanı bağlantısı, liste doldurma gibi işlemler
+}
+
+/* Form1 den form2 ye veri gönderme */
+private void buttonform2Click(object sender, EventArgs e)
+{
+    Form2 form2 = new Form2();
+    form2.GelenVeri = "Merhaba Form2"; // Form2'de public property
+    form2.Show();
+}
