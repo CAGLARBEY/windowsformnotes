@@ -1,0 +1,67 @@
+namespace Lokanta
+{
+    public partial class Form1 : Form
+    {
+        /*yemek fiyatları*/
+        int döner = 180;
+        int ayran = 20;
+        int kebap = 250;
+        int sutlac = 50; 
+
+
+        /* Money*/
+        int money = 1000;
+        int totalPrice = 0;
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            label1.Text = money.ToString() + "tl";
+        }
+        private void dönerpicturesbox_Click(object sender, EventArgs e)
+        {
+            totalPrice += döner;
+            cartListbox.Items.Add("döner");
+
+        }
+
+        private void kebappicturesbox.Click(object sender, EventArgs e)
+        {
+            totalPrice += kebap;
+            cartListbox.Items.Add("kebap");
+
+        }
+        private void ayranpicturesbox.Click(object sender, EventArgs e)
+        {
+            totalPrice += ayran;
+            cartListbox.Items.Add("ayran");
+
+        }
+        private void sutlacpicturesbox.Click(object sender, EventArgs e)
+        {
+            totalPrice += sutlac;
+            cartListbox.Items.Add("sütlaç");
+
+        }
+        private void payButton.Click(object sender, EventArgs e)
+        {
+            if (totalPrice <= 1000)
+            {
+                /* hesaplama kısmı*/
+                money = money - totalPrice;
+                moneyLabel.Text = money.ToString() + "Tl";
+                MessageBox.Show(" Alışverişiniz için teşekkür ederiz. ", MessageBoxButoons.OK, MessageBoxIcon.Information);
+
+            }
+            else
+            {
+                MessageBox.Show("Paranız yeterli değildir. ");
+
+            }
+        }
+
+    }
+}
