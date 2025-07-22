@@ -1,0 +1,24 @@
+private void OgrenciTakipForm_Load(object sender, EventArgs e)
+{
+    // Veritabanından sınıf listesini yükle
+    using (var context = new OkulDbContext())
+    {
+        var siniflar = context.Siniflar.ToList();
+        sinifComboBox.DataSource = siniflar;
+        sinifComboBox.DisplayMember = "SinifAdi";
+        sinifComboBox.ValueMember = "Id";
+    }
+
+    // Varsayılan tarihi bugün yap
+    kayitTarihiDateTimePicker.Value = DateTime.Today;
+
+    // DataGridView ayarları
+    ogrenciDataGridView.AutoGenerateColumns = false;
+    ogrenciDataGridView.Columns.Add("Id", "Öğrenci No");
+    ogrenciDataGridView.Columns.Add("AdSoyad", "Ad Soyad");
+    ogrenciDataGridView.Columns.Add("Sinif", "Sınıf");
+    ogrenciDataGridView.Columns.Add("KayitTarihi", "Kayıt Tarihi");
+
+    // Öğrenci listesini yenile
+    OgrenciListesiniYenile();
+}
